@@ -1,5 +1,7 @@
 import { Component } from '@angular/core';
+import { DataService } from 'Services/Data/data.service';
 import { UtilityService } from 'Services/Utility/utility.service';
+import { ITodo } from 'src/app/Model/i-todo';
 import { Todo } from 'src/app/Model/todo';
 
 
@@ -10,14 +12,16 @@ import { Todo } from 'src/app/Model/todo';
 })
 export class TodoListComponent {
 
-  todoArray: Todo[] = [];
+  todoArray: ITodo[] = [];
 
-  constructor(private utilityService: UtilityService){
-    const todo1 = new Todo('Comprare il pane', false);
-    const todo2 = new Todo('Pagare la bolletta', false);
-    const todo3 = new Todo('Chiamare la nonna', false);
+  constructor(private utilityService: UtilityService, private dataS: DataService){
+    // const todo1 = new Todo('Comprare il pane', false);
+    // const todo2 = new Todo('Pagare la bolletta', false);
+    // const todo3 = new Todo('Chiamare la nonna', false);
 
-    this.todoArray = [todo1, todo2, todo3];
+    // this.todoArray = [todo1, todo2, todo3];
+    this.dataS.getData().then(data => {
+      this.todoArray = data});
   };
 
   sortTodo(){
